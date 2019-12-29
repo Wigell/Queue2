@@ -8,16 +8,17 @@ import java.net.UnknownHostException;
 public class NetworkCommunication {
     private String queueLength = "";
     private Socket socket;
+    private PrintWriter writer;
 
-    public void connect() {
+    public void connect(Controller controller) {
         try {
             this.socket = new Socket("127.0.0.1", 7777);
             OutputStream output = socket.getOutputStream();
 
-            PrintWriter writer = new PrintWriter(output, true);
+            this.writer = new PrintWriter(output, true);
             InputStream input = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
+            controller.getQueueLength();
             while (!queueLength.equals("-1")) {
 
                 writer.println(queueLength);
@@ -35,7 +36,8 @@ public class NetworkCommunication {
     }
 
     public void sendQueueLength(String queueLength) {
-        this.queueLength = queueLength;
+
+        writer.println(queueLength);
     }
 
     public void closeConnection(Socket socket) throws IOException {

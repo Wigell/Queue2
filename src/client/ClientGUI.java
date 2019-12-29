@@ -26,7 +26,7 @@ public void display() {
         button.setOnAction(e -> {
             controller.setQueueLength(controller.getQueueLength());
             label.setText(controller.getQueueLength());
-            networkCommunication.connect();
+            networkCommunication.connect(controller);
             networkCommunication.sendQueueLength(controller.getQueueLength());
             try {
                 networkCommunication.closeConnection(networkCommunication.getSocket());

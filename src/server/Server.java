@@ -14,8 +14,8 @@ public class Server {
 
 
     public static void main(String[] args) {
-        String queue = "0";
-        String queueFromClient = "";
+
+        String queueLength = "";
         String sentMessage = "";
 
         try (ServerSocket serverSocket = new ServerSocket(7777)) {
@@ -29,10 +29,10 @@ public class Server {
             OutputStream output = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(output, true);
 
-            while (!queueFromClient.equals("-1")) {
-                queueFromClient = bufferedReader.readLine();
-                System.out.println(queueFromClient);
-                System.out.print("Du har nummer: " + queue);
+            while (!queueLength.equals("-1")) {
+                queueLength = bufferedReader.readLine();
+
+                System.out.print("Du har nummer: " + queueLength);
 
                 Scanner sc = new Scanner(System.in);
                 sentMessage = sc.nextLine();
